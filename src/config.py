@@ -1,14 +1,15 @@
+import os
 from configparser import ConfigParser
 
+BASE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)))
 
-def config(filename: str = "database.ini", section: str = "postgresql") -> dict:
-    """Получить конфиг для БД"""
+def config(filename=BASE_PATH + "/database.ini", section="postgresql") -> dict:
+    """Config for database"""
 
-    # create a parser
     parser = ConfigParser()
-    # read config file
     parser.read(filename)
     db = {}
+
     if parser.has_section(section):
         params = parser.items(section)
         for param in params:
